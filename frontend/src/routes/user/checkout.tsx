@@ -9,7 +9,7 @@ export const Route = createFileRoute('/user/checkout')({
     component: Checkout,
 });
 
-const API_BASE_URL = "http://localhost:5000/api";
+import API_BASE_URL from '../../services/api';
 
 const payments = [
     { id: 'upi', label: 'UPI', desc: 'Pay via Google Pay, PhonePe', icon: Smartphone },

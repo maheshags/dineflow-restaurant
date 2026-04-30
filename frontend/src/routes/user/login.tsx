@@ -14,7 +14,7 @@ export const Route = createFileRoute('/user/login')({
     }),
 });
 
-const API_BASE_URL = "http://localhost:5000/api";
+import API_BASE_URL from '../../services/api';
 
 function UserLoginPage() {
     const navigate = useNavigate();
