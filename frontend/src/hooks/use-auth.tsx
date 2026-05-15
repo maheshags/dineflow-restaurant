@@ -109,11 +109,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsAdmin(false);
   };
 
-  // Don't render children until hydrated (to prevent SSR/client mismatch)
-  if (!isHydrated) {
-    return <>{children}</>;
-  }
-
+  // Always provide the AuthContext so consumers can call `useAuth()` during SSR.
+  // During initial SSR hydration the values will be the defaults (logged out).
   return (
     <AuthContext.Provider value={{ isLoggedIn, isAdmin, user, token, login, logout }}>
       {children}
