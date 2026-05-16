@@ -103,8 +103,14 @@
     border-color: var(--border);
   }
 
+  html {
+    min-height: 100%;
+    background-color: oklch(0.16 0.012 260);
+  }
+
   body {
-    background-color: var(--background);
+    min-height: 100%;
+    background-color: oklch(0.16 0.012 260);
     color: var(--foreground);
     font-family: var(--font-body);
   }

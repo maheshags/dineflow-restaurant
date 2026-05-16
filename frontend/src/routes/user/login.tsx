@@ -135,8 +135,8 @@ function UserLoginPage() {
     };
 
     return (
-        <div className="min-h-screen bg-[oklch(0.16_0.012_260)] text-[oklch(0.95_0.005_260)] flex justify-center font-body">
-            <div className="w-full max-w-[480px] min-h-screen bg-[oklch(0.18_0.012_260)] relative flex flex-col shadow-2xl overflow-hidden">
+        <div className="min-h-[100dvh] bg-[oklch(0.16_0.012_260)] text-[oklch(0.95_0.005_260)] flex justify-center font-body">
+            <div className="w-full max-w-[480px] min-h-[100dvh] bg-[oklch(0.18_0.012_260)] relative flex flex-col shadow-2xl overflow-hidden">
                 {/* Decorative blobs */}
                 <div className="absolute top-0 right-0 w-72 h-72 rounded-full bg-primary/10 blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
                 <div className="absolute bottom-32 left-0 w-64 h-64 rounded-full bg-primary/5 blur-3xl pointer-events-none" />

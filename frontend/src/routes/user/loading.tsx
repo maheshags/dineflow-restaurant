@@ -49,8 +49,8 @@ function LoadingScreen() {
     const Icon = icons[iconIndex];
 
     return (
-        <div className="min-h-screen bg-[oklch(0.16_0.012_260)] text-[oklch(0.95_0.005_260)] flex justify-center font-body">
-            <div className="w-full max-w-[480px] min-h-screen bg-[oklch(0.18_0.012_260)] relative flex flex-col items-center justify-center px-8 overflow-hidden shadow-2xl">
+        <div className="min-h-[100dvh] bg-[oklch(0.16_0.012_260)] text-[oklch(0.95_0.005_260)] flex justify-center font-body">
+            <div className="w-full max-w-[480px] min-h-[100dvh] bg-[oklch(0.18_0.012_260)] relative flex flex-col items-center justify-center px-8 overflow-hidden shadow-2xl">
                 {/* Ambient blobs */}
                 <motion.div
                     className="absolute top-1/4 left-1/2 -translate-x-1/2 w-80 h-80 rounded-full bg-primary/15 blur-3xl"

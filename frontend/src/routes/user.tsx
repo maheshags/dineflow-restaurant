@@ -41,9 +41,9 @@ function UserShell() {
     }
 
     return (
-        <div className="min-h-screen bg-[oklch(0.16_0.012_260)] text-[oklch(0.95_0.005_260)] flex justify-center font-body">
+        <div className="min-h-[100dvh] bg-[oklch(0.16_0.012_260)] text-[oklch(0.95_0.005_260)] flex justify-center font-body">
             {/* App frame — mobile-first, max width like an APK on a phone */}
-            <div className="w-full max-w-[480px] min-h-screen bg-[oklch(0.18_0.012_260)] relative flex flex-col shadow-2xl">
+            <div className="w-full max-w-[480px] min-h-[100dvh] bg-[oklch(0.18_0.012_260)] relative flex flex-col shadow-2xl">
                 <main className="flex-1 pb-24">
                     <Outlet />
                 </main>
