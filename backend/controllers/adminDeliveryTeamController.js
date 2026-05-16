@@ -48,6 +48,9 @@ exports.createDeliveryPerson = async (req, res) => {
                 message: "password is required and must be at least 6 characters"
             });
         }
+        if (!phone?.trim()) {
+            return res.status(400).json({ success: false, message: "phone is required" });
+        }
 
         // ── Duplicate email check ────────────────────────────────────────────
         const existing = await User.findOne({ email: email.toLowerCase().trim() });
@@ -55,6 +58,14 @@ exports.createDeliveryPerson = async (req, res) => {
             return res.status(400).json({
                 success: false,
                 message: `Email "${email}" is already registered`
+            });
+        }
+
+        const existingPhone = await User.findOne({ phone: phone.trim() });
+        if (existingPhone) {
+            return res.status(400).json({
+                success: false,
+                message: `Phone "${phone}" is already registered`
             });
         }
 
@@ -67,7 +78,7 @@ exports.createDeliveryPerson = async (req, res) => {
             name:     name.trim(),
             email:    email.toLowerCase().trim(),
             password: hashedPassword,
-            phone:    phone   || "",
+            phone:    phone.trim(),
             address:  address || "",
             vehicle:  vehicle || "",
             status:   status === "inactive" ? "inactive" : "active",
@@ -82,6 +93,14 @@ exports.createDeliveryPerson = async (req, res) => {
 
     } catch (error) {
         console.error("createDeliveryPerson error:", error.message);
+        if (error.code === 11000) {
+            const field = Object.keys(error.keyPattern || error.keyValue || {})[0] || "field";
+            const value = error.keyValue?.[field] || "that value";
+            return res.status(400).json({
+                success: false,
+                message: `${field} "${value}" is already registered`
+            });
+        }
         res.status(500).json({ success: false, message: "Server error", error: error.message });
     }
 };

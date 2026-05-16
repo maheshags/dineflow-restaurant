@@ -1,7 +1,6 @@
 import { createFileRoute, Outlet, Link, useLocation, Navigate } from '@tanstack/react-router';
 import { Home, History, User } from 'lucide-react';
 import { DeliveryAuthProvider, useDeliveryAuth } from '@/hooks/use-delivery-auth';
-import { NotificationCenter } from '@/components/shared/NotificationCenter';
 import { useDeliveryNotifications } from '@/hooks/use-notifications';
 import { motion } from 'framer-motion';
 
@@ -46,11 +45,7 @@ function DeliveryShell() {
         <div className="min-h-screen bg-[#0A0A0A] text-white flex justify-center font-body">
             {/* App frame — mobile-first, max width like an APK on a phone */}
             <div className="w-full max-w-[480px] min-h-screen bg-[#0A0A0A] relative flex flex-col shadow-2xl">
-                {/* Header with notification center */}
-                <header className="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] z-50 p-4 bg-[#0A0A0A] border-b border-white/10 flex items-center justify-end">
-                    <NotificationCenter />
-                </header>
-                <main className="flex-1 pb-24 pt-14">
+                <main className="flex-1 pb-24">
                     <Outlet />
                 </main>
                 <BottomNav />

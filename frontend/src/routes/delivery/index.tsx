@@ -3,10 +3,11 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useDeliveryAuth } from '@/hooks/use-delivery-auth';
 import { DeliveryMap } from '@/components/shared/DeliveryMap';
+import { NotificationCenter } from '@/components/shared/NotificationCenter';
 import type { Order, OrderStatus } from '@/lib/types';
 import {
     MapPin, Phone, Package, ChevronDown, ChevronUp, Bike, CheckCircle2, Navigation,
-    CreditCard, Banknote, Clock, IndianRupee, Bell, User
+    CreditCard, Banknote, Clock, IndianRupee, User
 } from 'lucide-react';
 import { toast } from 'sonner';
 import deliveryService from '@/services/delivery';
@@ -62,10 +63,7 @@ function DeliveryHome() {
                             <h1 className="text-xl font-display font-bold text-white">{user?.name || 'Partner'}</h1>
                         </div>
                     </div>
-                    <button className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center relative">
-                        <Bell className="w-5 h-5 text-white/80" />
-                        <span className="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-                    </button>
+                    <NotificationCenter />
                 </div>
 
                 {/* Stats Strip */}
@@ -158,8 +156,8 @@ function OrderCard({ order, onOrderUpdated }: { order: Order; onOrderUpdated: (o
 
     const callCustomer = () => { window.location.href = `tel:${order.customerPhone}`; };
     const openMap = () => {
-        const addr = encodeURIComponent(order.deliveryAddress || '');
-        window.open(`https://www.google.com/maps/search/?api=1&query=${addr}`, '_blank');
+        const destination = encodeURIComponent(order.deliveryAddress || order.customerName || 'Delivery Location');
+        window.location.href = `https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=driving`;
     };
 
     const payIcon = order.paymentMethod === 'cash' ? <Banknote className="w-4 h-4" /> : <CreditCard className="w-4 h-4" />;
