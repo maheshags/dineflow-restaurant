@@ -117,7 +117,7 @@ function CategoriesPage() {
             <div key={cat.id} className="bg-card rounded-xl border border-border p-5 shadow-sm hover:shadow-md transition-shadow">
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-3">
-                  <span className="text-3xl">{cat.image}</span>
+                  <CategoryIcon image={cat.image} name={cat.name} />
                   <div>
                     <h3 className="font-semibold text-foreground">{cat.name}</h3>
                     <p className="text-xs text-muted-foreground">{cat.description}</p>
@@ -161,7 +161,7 @@ function CategoryForm({ item, onSave, onCancel, isSaving }: { item: Category | n
         <textarea value={form.description || ''} onChange={e => update('description', e.target.value)} rows={2} disabled={isSaving} className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring/30 resize-none disabled:opacity-50" />
       </div>
       <div>
-        <label className="block text-sm font-medium mb-1">Emoji/Icon</label>
+        <label className="block text-sm font-medium mb-1">Emoji/Icon or Image URL</label>
         <input value={form.image || ''} onChange={e => update('image', e.target.value)} disabled={isSaving} className="w-full h-10 rounded-lg border border-input bg-background px-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring/30 disabled:opacity-50" />
       </div>
       <label className="flex items-center gap-2 cursor-pointer">
@@ -173,5 +173,27 @@ function CategoryForm({ item, onSave, onCancel, isSaving }: { item: Category | n
         <button type="submit" disabled={isSaving} className="flex-1 h-10 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-50">{isSaving ? 'Saving...' : item ? 'Update' : 'Add'}</button>
       </div>
     </form>
+  );
+}
+
+function CategoryIcon({ image, name }: { image?: string; name: string }) {
+  const value = image?.trim();
+  const isUrl = !!value && /^https?:\/\//i.test(value);
+
+  if (isUrl) {
+    return (
+      <img
+        src={value}
+        alt={name}
+        className="w-12 h-12 rounded-lg object-cover border border-border bg-muted shrink-0"
+        loading="lazy"
+      />
+    );
+  }
+
+  return (
+    <span className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center text-3xl shrink-0">
+      {value || '📦'}
+    </span>
   );
 }
