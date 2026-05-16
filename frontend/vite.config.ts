@@ -5,7 +5,7 @@ import { nitro } from "nitro/vite";
 import path from "path";
 
 export default defineConfig({
-  plugins: [tanstackStart(), nitro(), viteReact()],
+  plugins: [tanstackStart(), nitro({ preset: "vercel" }), viteReact()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
