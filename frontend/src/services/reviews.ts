@@ -13,7 +13,8 @@ export interface BackendRating {
     name: string;
   };
   rating: number;
-  review: string;
+  review?: string;
+  comment?: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -29,7 +30,7 @@ export const transformRating = (rating: BackendRating): Review => {
     foodId: rating.food?._id || 'unknown',
     foodName: rating.food?.name || 'Unknown Item',
     rating: rating.rating,
-    text: rating.review || '',
+    text: rating.review || rating.comment || '',
     date: new Date(rating.createdAt).toISOString().split('T')[0], // Format as YYYY-MM-DD
     status: 'published' as const, // Default status from backend
   };
@@ -55,8 +56,8 @@ export const reviewsService = {
 
       const data = await response.json();
 
-      // Handle both array and wrapped object response
-      const ratings = Array.isArray(data) ? data : data.ratings || [];
+      // Handle array responses and wrapped backend responses.
+      const ratings = Array.isArray(data) ? data : data.data || data.ratings || [];
 
       return ratings.map(transformRating);
     } catch (error) {
