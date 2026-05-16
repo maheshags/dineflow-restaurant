@@ -75,21 +75,23 @@ export function useNotifications() {
     };
 }
 
-export function useDeliveryNotifications(personId: string | null) {
+export function useDeliveryNotifications(personId: string | null, enabled = true) {
     const { addNotification } = useNotifications();
     const lastOrderIds = useRef<Set<string>>(new Set());
     const lastStatuses = useRef<Record<string, string>>({});
 
     useEffect(() => {
+        if (!enabled || !personId) return;
+
         if (typeof window !== 'undefined' && 'Notification' in window) {
             if (Notification.permission === 'default') {
                 Notification.requestPermission();
             }
         }
-    }, []);
+    }, [enabled, personId]);
 
     useEffect(() => {
-        if (!personId) return;
+        if (!enabled || !personId) return;
 
         let cancelled = false;
 

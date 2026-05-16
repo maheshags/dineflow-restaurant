@@ -30,8 +30,8 @@ function DeliveryShell() {
     const { isAuthed, personId } = useDeliveryAuth();
     const isPublic = PUBLIC_PATHS.includes(location.pathname);
 
-    // Enable delivery notifications
-    useDeliveryNotifications(personId);
+    // Enable delivery notifications only after login.
+    useDeliveryNotifications(personId, isAuthed && !isPublic);
 
     if (!isAuthed && !isPublic) {
         return <Navigate to="/delivery/login" />;
